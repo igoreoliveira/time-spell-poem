@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feitiço para parar o tempo</title>
+    <style>
+        #main-container {
+            margin: 40px 40px 10px 25%; 
+            width: 600px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <div id="text-container">
+            <p>As imagens, preto e branco. Sustos enormes com coisas pequenas. A apresentação das cores. O cheiro da pele dos pais.
+            </p>
+        </div>
+        <button id="stop-button">Parar</button>
+    </div>
+
+
+    <script>
+        // Array de textos
+        const texts = [
+            "Uma pilha de gibis da Turma da Mônica entregue na casa dos avós. Uma montanha para escalar. Uma coleção infinita de viradas de páginas.",
+            "Acolhido nas mãos de uma garota no prézinho. Conta aos pais com a inocência de quem conta os dias normais. Não entende de expectativas.",
+            "O tio os leva à loja de brinquedos, junto aos primos. Ele oferece qualquer-briquedo-da-loja para quem for palmeirense. Permanece corintiano. Ganha um presente, de consolação. ",
+            "Na casa do amiguinho, brincam de carnaval e trocam de fantasias juntos. Sente alegria e a formação de um laço no momento de intimidade.",
+            "Na casa dos avós, é noite, aniversário. A tia bebeu demais. Derruba a churrasqueira. Sua mãe sai correndo. Fica com os primos na sala, pouco depois é levado para casa.",
+            "Vê o mar à sua frente. Domingo, Ubatuba. Segunda-feira começa a quinta série em uma escola nova. Tudo parece novo e imenso.",
+            "O salão de festas tem um sofá velho. Compartilha um segredo com seu melhor-amigo-pra-vida-toda: está apaixonado por uma menina. Percorre um arrepio pelo corpo ao dar palavras ao segredo.",
+            "Lê livros de bruxaria com a luz do sol que escapa às nuvens após pesada tempestade. Não há eletricidade, ruas alagadas. A noite chega escura.",
+            "Sente-se sozinho, é a metade do primeiro semestre de aulas do primeiro ano do ensino médio. Sabe fazer contas complexas. Começa a desconfiar que não sabe fazer amigos.",
+            "Debaixo da escada que leva para as quadras da escola, beija na boca pela primeira vez. Uma garota.",
+            "Cinco noites, cinco sonhos com o amigo que o tem levado a novos lugares. Num dos sonhos, percorrem um terminal rodoviário e partem para novas aventuras.",
+            "O velório de um amigo. Morreu aos 16 anos. O céu nublado, os pensamentos confusos. A vida ainda se mostra grande à sua frente, mas faz-se de tamanho e impacto parecido a iminência da morte.",
+            "Com o avô e a avó na praia, pesca em um barco em alto mar. Não percebe, mas queima a pele o mormaço.",
+            "Nas ruas com o melhor-amigo-daqueles-dias numa brincadeira de um-querer-carregar-a-mochila-do-outro, interrompidos pelo grito da sua namorada dizendo: vocês não vêem o quão viados vocês são? Ela vai embora e deixa os dois.",
+            "A mãe desmaia na sua frente. Ela melhora e vai dormir. Passa a madrugada acordado.",
+            "Tem 17 anos. Diz a si mesmo, a caminho da universidade, nunca mais vou beijar meninas.",
+            "Está bêbado e confuso não-sabe-onde e tudo muda rápido ao seu redor. Não vê quando outra boca se aproxima da sua.",
+            "Decide começar de novo. Pensa em quantas vezes mudou de casa. De escola. A faculdade. Pensa começar de novo. No metrô, volta de um fim de semana de  construção de casas emergenciais e decide falar com o rapaz-do-chapéu que não saiu dos seus olhos.",
+            "Encontra um melhor-amigo-para a vida. Vêem o melhor-show-da-sua-vida no Lollapalooza. Veste camisa de flanela sempre que pode - faça frio ou faça sol",
+            "O pai morre em um assalto. Pouca coisa faz sentido.",
+            "O melhor-amigo-para-a-vida namora sua amiga-de-todo-dia. Ainda assim, é beijado por ele no terraço do prédio da faculdade.",
+            "Passa um ano morando em Nova York. Conhece novas pessoas, fala inglês (e espanhol), dias inteiros sem falar português. Sente saudades. Na mesma medida, não quer perder um segundo da vida nova.",
+            "A euforia e o terror de pegar um pau na mão, pela primeira vez, e o levar até a boca.",
+            "Volta ao Brasil e a amiga-de-todo-dia e o melhor-amigo-para a vida o odeiam. Entra em depressão. Quase vinte dias sem comer.",
+            "Cola grau e agora tem um emprego. Remoeu por três anos o trauma. Namora um homem, enquanto vai se formando, também, homem.",
+            "O avô morre, mas teve tempo de contar a ele de suas histórias da semana em que passou no Texas, cenário dos filmes de velho oeste a que ele assistia.",
+            "Quebra o braço em uma viagem à patagônia na Argentina. Passa três dias internado no hospital em Ushuaia para uma operação de emergência, antes de voltar para casa.",
+            "Na cama, após ser passivo no sexo, o corpo ofegante, o namorado ao lado, quase-que-domindo, precisa voltar para casa, mas manda uma mensagem avisando, não volto hoje.",
+            "O bloquinho de carnaval é dispersado pela chuva. Olha para os amigos e diz que quer correr pelado pelo vale do Anhangabaú. Eles o acompanham.",
+            "Termina o relacionamento com seu namorado. Antes de ir embora, colam os corpos e dançam uma música. Transam uma última vez.",
+            "A avó fica doente e todos pensam que ela vai morrer. Mas ela volta, ela avisa, não está nem perto da minha hora. Eu fico",
+            "Está apaixonado por um amigo, pensa que é recíproco. Não consegue falar, mas na balada são dois meninos sem camisa dançando juntos.",
+            "Chove forte e espera ser buscado por um motorista de aplicativo sob um guarda-chuva na calçada. É tarde da noite, fechou o escritório.",
+            "O irmão mais velho anuncia que será pai. Será tio.",
+            "O amigo-sem-camisa-da-balada começa a namorar uma garota.",
+            "Vai morar com uma amiga, pinta de rosa a parede do quarto.",
+            "Nasce a sobrinha. A primeira vez que a pega no colo. As lágrimas nos olhos do irmão.",
+            "A pandemia vem e passa. Parece um ano. Parece uma vida posta no meio da vida.",
+        ];
+
+        // Intervalo em milissegundos (ex: 2000ms = 2 segundos)
+        const intervalTime = 5000;
+        let currentIndex = 0;
+        let intervalId;
+
+        // Função para adicionar o texto ao HTML
+        function addText() {
+            if (currentIndex < texts.length) {
+                const textContainer = document.getElementById("text-container");
+                const newText = document.createElement("p");
+                newText.textContent = texts[currentIndex];
+                textContainer.appendChild(newText);
+                currentIndex++;
+            } else {
+                clearInterval(intervalId); // Para o intervalo quando todos os textos foram adicionados
+            }
+        }
+
+        // Inicia o intervalo
+        intervalId = setInterval(addText, intervalTime);
+
+        // Botão para parar o intervalo
+        const stopButton = document.getElementById("stop-button");
+        stopButton.addEventListener("click", () => {
+            clearInterval(intervalId);
+            stopButton.remove();
+        });
+    </script>
+</body>
+</html>
